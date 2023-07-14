@@ -6,7 +6,7 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="com.logicstudio.bonjourdailytips" Publisher="CN=User Name" Version="1.0.0.0" />
+  <Identity Name="com.logicstudio.bonjourdailytips" Publisher="CN=Logic.Studio" Version="0.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="8D63AB01-5D61-4260-958C-B09AA5CE63B3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

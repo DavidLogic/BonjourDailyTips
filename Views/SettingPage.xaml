@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BonjourDailyTips.Views.SettingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="">
+    <VerticalStackLayout Margin="10" Spacing="10">
+        <HorizontalStackLayout Spacing="10">
+            <Image
+                HeightRequest="64"
+                SemanticProperties.Description="The dot net bot waving hello!"
+                Source="dotnet_bot.png" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="22"
+                Text="Bonjour每日提醒"
+                VerticalOptions="End" />
+            <Label
+                FontSize="22"
+                Text="v1.0"
+                VerticalOptions="End" />
+        </HorizontalStackLayout>
+
+        <Label Text="基于企业微信版Bonjour每日提醒进化🥰 MAUI强力驱动。" />
+        <Button Clicked="Button_Clicked" Text="项目主页" />
+
+        <Label
+            Margin="0,8,0,0"
+            FontAttributes="Bold"
+            FontSize="22"
+            Text="设置"
+            VerticalOptions="End" />
+
+        <Label
+            Margin="8,8,0,0"
+            FontAttributes="Bold"
+            Text="每日提醒时间" />
+        <!--<TimePicker Time="{Binding ReminderTime}" />-->
+        <TimePicker Margin="8,8,0,0" />
+        <Label
+            Margin="8,8,0,0"
+            FontAttributes="Bold"
+            Text="纪念日" />
+        <!--<ListView SelectionMode="None" ></ListView>-->
+        <Label Text="内容" />
+        <Entry />
+        <Label Text="内容" />
+        <Entry />
+        <DatePicker />
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BonjourDailyTips.Views.WeatherPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:weamodels="clr-namespace:BonjourDailyTips.Models.Weather"
+    xmlns:weathervm="clr-namespace:BonjourDailyTips.ViewModels"
+    Title=""
+    Background="{StaticResource Blue200Accent}">
+    <ContentPage.BindingContext>
+        <weathervm:WeatherPageViewModel />
+    </ContentPage.BindingContext>
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+    <RefreshView Command="{Binding RefeshCommand}" IsRefreshing="{Binding IsRefreshing}">
+
+
+        <Grid Margin="0,26,0,0">
+            <ScrollView>
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout
+                        Padding="40"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+                        <Image Aspect="AspectFit" Source="ic_fluent_location_24_filled.png" />
+                        <Label
+                            Margin="10,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{Binding City, Mode=OneWay}"
+                            TextColor="White" />
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+                        <Label
+                            Margin="20,0,0,0"
+                            FontSize="100"
+                            Text="{Binding Temperature}"
+                            TextColor="White" />
+                        <Label
+                            Margin="5,15,0,0"
+                            FontSize="Medium"
+                            Text="℃"
+                            TextColor="White" />
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="2"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+                        <Label
+                            FontSize="Subtitle"
+                            Text="{Binding MaxTemperature}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="Subtitle"
+                            Text=" / "
+                            TextColor="White" />
+                        <Label
+                            FontSize="Subtitle"
+                            Text="{Binding MinTemperature}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="Subtitle"
+                            Text="℃"
+                            TextColor="White" />
+                    </StackLayout>
+                    <Label
+                        Grid.Row="3"
+                        FontSize="Subtitle"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding Text}"
+                        TextColor="White" />
+                    <CollectionView Grid.Row="4" ItemsSource="{Binding HourlyItems}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="16" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="weamodels:HourlyItem">
+                                <ScrollView Orientation="Horizontal">
+
+
+                                    <StackLayout Margin="0,15,0,0" Orientation="Vertical">
+                                        <Label
+                                            Margin="10,0,0,0"
+                                            FontSize="Subtitle"
+                                            Text="{Binding fxTime}"
+                                            TextColor="White" />
+                                        <Image
+                                            Margin="0,0,0,0"
+                                            Aspect="AspectFit"
+                                            HeightRequest="25"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="{Binding icon}"
+                                            WidthRequest="25" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                                Margin="18,0,0,0"
+                                                FontSize="Subtitle"
+                                                Text="{Binding temp}"
+                                                TextColor="White" />
+                                            <Label
+                                                FontSize="Subtitle"
+                                                Text="℃"
+                                                TextColor="White" />
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <CollectionView
+                        Grid.Row="5"
+                        Margin="0,16,0,0"
+                        EmptyView="无可用的数据:("
+                        ItemsSource="{Binding DailyItems}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="16" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="weamodels:DailyItem">
+                                <StackLayout Margin="0,15,0,0" Orientation="Horizontal">
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="96" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Column="0"
+                                            Margin="10,0,0,0"
+                                            FontSize="Subtitle"
+                                            Text="{Binding DayOfWeek}"
+                                            TextColor="White" />
+                                        <Label
+                                            Grid.Column="1"
+                                            Margin="8,0,0,0"
+                                            FontSize="Subtitle"
+                                            Text="{Binding fxDate}"
+                                            TextColor="White" />
+                                        <Image
+                                            Grid.Column="2"
+                                            Margin="50,0,0,0"
+                                            Aspect="AspectFit"
+                                            HeightRequest="25"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="ic_fluent_location_24_filled.png"
+                                            WidthRequest="25" />
+                                    </Grid>
+
+                                    <StackLayout
+                                        Margin="0,0,10,0"
+                                        HorizontalOptions="EndAndExpand"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontSize="Subtitle"
+                                            Text="{Binding tempMax}"
+                                            TextColor="White" />
+                                        <Label
+                                            FontSize="Subtitle"
+                                            Text=" / "
+                                            TextColor="White" />
+                                        <Label
+                                            FontSize="Subtitle"
+                                            Text="{Binding tempMin}"
+                                            TextColor="White" />
+                                        <Label
+                                            FontSize="Subtitle"
+                                            Text="℃"
+                                            TextColor="White" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <StackLayout
+                        Grid.Row="6"
+                        Margin="0,50,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Vertical"
+                        VerticalOptions="EndAndExpand">
+                        <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label
+                                FontSize="Micro"
+                                Text="更新时间"
+                                TextColor="White" />
+                            <Label
+                                Margin="8,0,0,0"
+                                FontSize="Micro"
+                                Text="{Binding RefreshedTime}"
+                                TextColor="White" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label
+                                FontSize="Micro"
+                                Text="数据提供方："
+                                TextColor="White" />
+                            <Label
+                                FontSize="Micro"
+                                Text="和风天气"
+                                TextColor="White" />
+                            <Image Aspect="AspectFit" Source="weather/qweather.png" />
+
+                        </StackLayout>
+                    </StackLayout>
+
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </RefreshView>
+</ContentPage>
